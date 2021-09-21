@@ -1,5 +1,5 @@
 {
-    "name": "swisnl/laravel-fulltext",
+    "name": "emild/laravel-fulltext",
     "type": "library",
     "description": "Fulltext indexing and searching for Laravel",
     "keywords": [

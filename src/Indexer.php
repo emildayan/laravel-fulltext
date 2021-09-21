@@ -32,7 +32,7 @@ class Indexer
         $model = new $class();
         $self = $this;
         if (in_array(Indexable::class, class_uses($model), true)) {
-            $model->chunk(100, function ($chunk) use ($self) {
+            $model->withTrashed()->chunk(100, function ($chunk) use ($self) {
                 foreach ($chunk as $modelRecord) {
                     $self->indexModel($modelRecord);
                 }

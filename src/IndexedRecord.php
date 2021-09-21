@@ -3,6 +3,7 @@
 namespace Swis\Laravel\Fulltext;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class IndexedRecord extends Model
 {

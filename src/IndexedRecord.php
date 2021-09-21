@@ -17,7 +17,7 @@ class IndexedRecord extends Model
 
     public function indexable()
     {
-        return $this->morphTo();
+        return $this->morphTo()->withoutGlobalScope(SoftDeletingScope::class);
     }
 
     public function updateIndex()

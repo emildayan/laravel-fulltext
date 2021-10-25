@@ -12,7 +12,21 @@ class TermBuilder
         // else we will break the MySQL query.
         $search = trim(preg_replace('/[+\-><\(\)~*\"@]+/', ' ', $search));
 
-        $terms = collect(preg_split('/[\s,]+/', $search));
+        
+        $splittedWords = collect(preg_split('/[\s,]+/', $search));
+        $terms = [];
+        foreach ($splittedWords as $index => $word)
+        {
+            if($index == 0) { $terms[] = $word; continue; }
+            if(strlen($word) < 4) {
+                $terms[$index - 1].= ''.$word;
+                $terms[] = '';
+                continue;
+            }
+            $terms[] = $word;
+        }
+        $terms = collect($terms);
+
 
         if ($wildcards === true) {
             $terms->transform(function ($term) {

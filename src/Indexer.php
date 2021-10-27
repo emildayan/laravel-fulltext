@@ -32,11 +32,25 @@ class Indexer
         $model = new $class();
         $self = $this;
         if (in_array(Indexable::class, class_uses($model), true)) {
-            $model->withTrashed()->chunk(100, function ($chunk) use ($self) {
+            
+            if(in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses($model))
+               {
+                   $model->withTrashed()->chunk(100, function ($chunk) use ($self) {
                 foreach ($chunk as $modelRecord) {
                     $self->indexModel($modelRecord);
                 }
             });
+               }
+               else
+               {
+                   $model->chunk(100, function ($chunk) use ($self) {
+                foreach ($chunk as $modelRecord) {
+                    $self->indexModel($modelRecord);
+                }
+            });
+               }
+            
+            
         }
     }
 }

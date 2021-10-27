@@ -25,7 +25,7 @@ class TermBuilder
             }
             $terms[] = $word;
         }
-        $terms = collect($terms);
+        $terms = collect($terms)->filter();
 
 
         if ($wildcards === true) {

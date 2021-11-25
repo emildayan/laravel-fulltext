@@ -58,21 +58,7 @@ trait Indexable
 
             $indexData[] = $indexValue;
         }
-
-       
-        $splittedWords = collect(preg_split('/[\s,]+/', implode(' ', array_filter($indexData))));
-        $terms = [];
-        foreach ($splittedWords as $index => $word)
-        {
-            if($index == 0) { $terms[] = $word; continue; }
-            if(strlen($word) < 4) {
-                $terms[$index - 1].= ''.$word;
-                $terms[] = '';
-                continue;
-            }
-            $terms[] = $word;
-        }
-
-        return implode(' ', array_filter($terms));
+        
+        return implode(' ', array_filter($indexData));
     }
 }

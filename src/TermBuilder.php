@@ -11,21 +11,8 @@ class TermBuilder
         // Remove every boolean operator (+, -, > <, ( ), ~, *, ", @distance) from the search query
         // else we will break the MySQL query.
         $search = trim(preg_replace('/[+\-><\(\)~*\"@]+/', ' ', $search));
-
         
-        $splittedWords = collect(preg_split('/[\s,]+/', $search));
-        $terms = [];
-        foreach ($splittedWords as $index => $word)
-        {
-            if($index == 0) { $terms[] = $word; continue; }
-            if(strlen($word) < 4) {
-                $terms[$index - 1].= ''.$word;
-                $terms[] = '';
-                continue;
-            }
-            $terms[] = $word;
-        }
-        $terms = collect($terms)->filter();
+        $terms = collect(preg_split('/[\s,]+/', $search));
 
 
         if ($wildcards === true) {

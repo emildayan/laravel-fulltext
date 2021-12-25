@@ -69,7 +69,7 @@ class ModelObserver
         $this->created($model);
     }
 
-    /**
+     /**
      * Handle the deleted event for the model.
      *
      * @param \Illuminate\Database\Eloquent\Model $model
@@ -79,7 +79,17 @@ class ModelObserver
         if (static::syncingDisabledFor($model)) {
             return;
         }
+        if (!in_array('Illuminate\Database\Eloquent\SoftDeletes', class_uses($model->getMorphClass())))
+        {
+            $model->unIndexRecord();
+        }
+    }
 
+    public function forceDeleted($model)
+    {
+        if (static::syncingDisabledFor($model)) {
+            return;
+        }
         $model->unIndexRecord();
     }
 
